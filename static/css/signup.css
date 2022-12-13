@@ -1,0 +1,41 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #fff;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    max-width: 600px;
+    border-radius: 20px;
+}
+.card{
+    
+    border-radius: 20px;
+    height: 650px;
+    background-image: linear-gradient(to right,#0084ff,#00f2ff);
+    border:none;
+    overflow: hidden;
+    box-shadow: 0 5px 8px #414141;
+    z-index: 0;
+    box-sizing: border-box;
+}
+.circle{
+    position: absolute;
+    bottom: -210px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:#fff;
+    clip-path: circle(50%);
+    height: 600px;
+    width: 600px;
+    z-index: -5;
+    overflow: hidden;
+}

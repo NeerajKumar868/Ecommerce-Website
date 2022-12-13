@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+ <style>
+  h4{
+    color: rgb(110, 213, 245);
+    font-size: 27px;
+    margin-top: 10px;
+    font-weight: bolder;
+  }
+.nav-link{
+    color: rgb(3, 3, 3);
+    font-size: 25px;
+    font-weight: bolder;
+  }
+#tabs-2 a{
+
+text-decoration: none;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+  }
+ </style>
+  <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</head>
+
+<body>
+  <ul class="nav justify-content-center">
+    {% if request.user.is_authenticated %}
+    <h4>{{user.first_name}}</h4>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/account/logout">LOG OUT</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="/account/register">SIGN UP</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/account/login">LOGIN</a>
+    </li>
+    {% endif %}
+    <li class="nav-item">
+      <a class="nav-link" href="/cartapp/view">CART</a>
+    </li>
+  </ul>
+
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <a class="navbar-brand" href="/order/saveadd">Summery</a>
+            <a class="navbar-brand" href="#">About</a>
+            <a class="navbar-brand" href="#">Terms & Condition</a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  {% block content %}
+
+  {% endblock content %}
+
+
+
+
+
+</body>
+
+</html>

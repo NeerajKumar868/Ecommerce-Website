@@ -1,0 +1,153 @@
+{% extends 'base.html' %}.
+{% block content %}
+{% load usertags %}
+{% load static %}
+
+<div class="container-fluid text-center mt-5 ">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <h2 style="margin-bottom: 40px; background-color: rgb(206, 206, 206);">CART</h2>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>PRODUCTS</th>
+            <th>QUANTITY</th>
+            <th>AMOUNT</th>
+          </tr>
+        </thead>
+        {% for product in mycart.productlist.all %}
+        <tbody>
+          <tr>
+            <td>
+              <img class="img-thumbnail" src="{{product.mobile.image.url}}" alt="INVALID" height="90px" width="100px">
+              <h6>{{product.mobile.mobilename}}</h6>
+            </td>
+            <td style="width: 50px;">
+              <input style="margin-top: 30px;" class=" form-control" type="number" min="1" name="quantity"
+                value="{{product.quantity}}">
+              <input type="hidden" name="pid" value="{{product.pid}}">
+            </td>
+            <td style="padding-top: 45px;">{{product.mobile.mobileprice}}</td>
+            <td>
+              <a style="margin-top: 50px" class="fas fa-heart-square" href="/" onclick=""></a>
+              <a style="margin-top: 50px" class="fas fa-trash-alt" href="/cartapp/remove/{{product.pid}}"
+                onclick=""></a>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+        <form action="/order/saveadd/">
+          <th colspan="2"><a href="/index" class="fas fa-long-arrow-alt-left">Continue Shopping</th>
+          <th>
+            <input type="hidden" name="id" value="{{mycart.cartid}}">
+            <input type="text" name="amount" class="btn btn-outline-primary w-50"
+              value="{{mycart.productlist.all|calcBill}}" readonly>
+          </th>
+          <th></th>
+
+      </table>
+
+    </div>
+    <div class="col-sm-4">
+      <h2 style="margin-bottom: 40px; background-color: rgb(206, 206, 206); ">SUMMERY</h2>
+      <table class="table table-hover">
+        <tr>
+          <td>Total</td>
+          <td>
+            <input type="hidden" name="id" value="{{mycart.cartid}}">
+            <input type="text" name="amount" class="btn btn-light w-50" value="{{mycart.productlist.all|calcBill}}"
+              readonly>
+          </td>
+        </tr>
+        <tr>
+          <td>Offer</td>
+          <td>NOT AVAILABLE</td>
+        </tr>
+        <tr>
+          <td>Delivary Charge</td>
+          <td>FREE</td>
+        </tr>
+        <tr>
+          <th>Sub Total</th>
+          <th>
+            <input type="hidden" name="id" value="{{mycart.cartid}}">
+            <input type="text" name="amount" class="btn btn-light w-50" value="{{mycart.productlist.all|calcBill}}"
+              readonly>
+          </th>
+      </table>
+      <div>
+        <button class="btn btn-light">PLACE ORDER</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="{% static 'E:\Neeraj\2022\ecommerceproject\static\js\jquery-3.6.0.min.js' %}"></script>
+<script>
+  $(function () {
+    $('[name=quantity]').change(function () {
+      inputqty = $(this)
+      quantity = $(this).val()
+      pid = $(this).next('[name=pid]').val()
+      $.post('/cartapp/update', { 'quantity': quantity, 'pid': pid, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+        function (response) {
+          $('[name=amount]').val(response.totalbill)
+          inputqty.parent().next("#totalprice").html("&#8377; " + response.totalamount)
+        });
+    });
+  });
+</script>
+<footer class="bd-footer py-4 py-md-5 mt-5 bg-light">
+  <div class="container py-4 py-md-5 px-4 px-md-3">
+    <div class="row">
+      <div class="col-lg-3 mb-3">
+        <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/" aria-label="Bootstrap">
+
+          <span class="fs-5">Shop Address</span>
+        </a>
+        <ul class="list-unstyled small text-muted">
+          <li class="mb-2">Shop No-5,2nd Floor,</li>
+          <li class="mb-2">Powai Road Andheri West</li>
+          <li class="mb-2">Mumbai 400068</li>
+          <li class="mb-2"><a href="" target="_blank" rel="noopener"
+              style="text-decoration: none;">shop52@gmail.com</a>.</li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+        <h5>Partners</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="">Vivo</a></li>
+          <li class="mb-2"><a href="">Oppo</a></li>
+          <li class="mb-2"><a href="">Xiomi</a></li>
+          <li class="mb-2"><a href="">Iphone</a></li>
+          <li class="mb-2"><a href="">Samsung</a></li>
+          <li class="mb-2"><a href="">Nokia</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2 mb-3">
+        <h5>Delivary Support Partner</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="">Amazone Delivary Center</a></li>
+          <li class="mb-2"><a href="">ShadoFx</a></li>
+          <li class="mb-2"><a href="">Blue Dart</a></li>
+          <li class="mb-2"><a href="">Parcel</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2 mb-1">
+        <h5>Contact Us</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="">Facebook</a></li>
+          <li class="mb-2"><a href="">Instagram</a></li>
+          <li class="mb-2"><a href="">Youtube</a></li>
+          <li class="mb-2"><a href="">022-12345678</a></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}

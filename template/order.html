@@ -1,0 +1,31 @@
+{% extends 'base.html' %}.
+{% block content %}
+{% load usertags %}
+{% load static %}
+{% include 'error.html' %}
+<h5 align='center' >Thanks for your order,{{user.username}}<span style="color: deepskyblue; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: x-large; font-weight:bolder; ">{{user.first_name}} !</span>  
+</h5>
+<div class="container mt-3 " align='center' >
+    <h4 style="background-color: rgb(223, 223, 223); height: 45px; font-family: 'Times New Roman', Times, serif; font-weight: bolder;" >
+        Order Deatails
+    </h4>
+    <table class="table table-hover" style="font-family: 'Courier New', Courier, monospace; font-weight: bolder; " >
+        <tr>
+            <th>Sr No</th>
+            <th>Order Date</th>
+            <th>Order Status</th>
+            <th>Quantity</th>
+            <!-- <th>Amount</th> -->
+        </tr>
+        {% for product in order.productlist.all %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{order.orderdate}}</td>
+            <td>{{order.orderstatus}}</td>
+            <td>{{product.quantity}} Items </td>
+            <!-- <td>{{product.cloth.cprice}}</td> -->
+        </tr>
+        {% endfor %}
+    </table>
+</div> 
+{% endblock %}

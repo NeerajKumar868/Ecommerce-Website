@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>FORM</h1>
+
+<!-- {% if action == "save" %}
+<form action="save" method="post" enctype="multipart/form-data" >
+{% elif action == "Update" %}
+<form action="/update" method="post" enctype="multipart/form-data" >
+ID:- <input type="text" name="mobileid" value="{{mobile_list.mobileid}}" readonly > 
+{% endif %}
+{% csrf_token %}
+
+NAME:- <input type="text" name="mobilename" value="{{mobile_list.mobilename}}" >
+PRICE:- <input type="text" name="mobileprice" value="{{mobile_list.mobileprice}}" >
+DISCRIPTION:- <input type="text" name="mobilediscription" value="{{mobile_list.mobilediscription}}" >
+IMAGE:- <input  type="file" name="mobileimage">
+        <img src="/{{mobile.image.url}}" class="img-thumbnail" alt="No Image">
+OFFER:- <input type="text" name="mobileoffer" value="{{mobile_list.mobiledoffer}}" >
+DELEVER:- <input type="text" name="mobiledeliver" value="{{mobile_list.mobiledeliver}}" >
+<input type="submit" value="{{action}}" >
+</form> -->
+
+
+
+
+ <div class="container">
+
+{% if action == "save" %}
+<form action="save" method="post" enctype="multipart/form-data" >
+{% elif action == "Update" %}
+<form action="/update" method="post" enctype="multipart/form-data" >
+ <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input type="text" class="form-control" name="mobileid" value="{{mobile_list.mobileid}}" readonly  >
+  </div>
+{% endif %}
+{% csrf_token %}
+
+    <div class="mb-3">
+      <label for="name" class="form-label">NAME</label>
+      <input type="text" class="form-control" name="mobilename" value="{{mobile_list.mobilename}}" >
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">PRICE</label>
+      <input type="number" class="form-control" name="mobileprice" value="{{mobile_list.mobileprice}}" >
+    </div>
+    <div class="mb-3">
+        <label for="discription" class="form-label">DISCRIPTION</label>
+        <input type="text" class="form-control" name="mobilediscription" value="{{mobile_list.mobilediscription}}">
+ 
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">IMAGE</label>
+        <input   type="file" name="mobileimage" class="form-control">
+        <img src="/{{mobile.image.url}}" class="img-thumbnail" alt="No Image">
+      </div>
+      <div class="mb-3">
+        <label for="mobileoffer" class="form-label">OFFER </label>
+        <input type="text" class="form-control" name="mobileoffer" value="{{mobile_list.mobiledoffer}}" >
+    
+      </div>
+      <div class="mb-3">
+        <label for="deliver" class="form-label">DELIVER</label>
+        <input type="text" class="form-control" name="mobiledeliver" value="{{mobile_list.mobiledeliver}}" >
+      </div>
+    
+    <button type="submit" class="btn btn-primary" value="{{action}}" >Submit</button>
+  </form>
+</div> 
+  {% endblock %}
